@@ -29,7 +29,7 @@ suites:
   browser: chrome
   config:
     testFiles:
-    - '**/login.spec.js'
+    - '**/*.*'
 #docker:
 #  fileTransfer: mount
 artifacts:
