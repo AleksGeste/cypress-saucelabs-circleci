@@ -30,8 +30,17 @@ suites:
   config:
     testFiles:
     - '**/*.*'
+- name: cypress - windows 10 - firefox 96
+  browser: firefox
+  browserVersion: 96.0
+  platformName: windows 10
+  config:
+    testFiles:
+    - '**/*.*'
+  mode: sauce
 #docker:
 #  fileTransfer: mount
+version: 2.1
 artifacts:
   download:
     match:
