@@ -8,6 +8,7 @@ jobs:
       - image: cimg/node:lts
     steps:
       - checkout
+      - run: npm run start
       - setup_remote_docker:
           version: 20.10.2
       - saucectl/saucectl-run
