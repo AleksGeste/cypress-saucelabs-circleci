@@ -8,12 +8,10 @@ jobs:
       - image: cimg/node:lts
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.2
+      - start: 'yarn start'
       - saucectl/saucectl-run
 
 workflows:
-  version: 2
   default_workflow:
     jobs:
       - test-cypress
