@@ -4,8 +4,6 @@ kind: cypress
 showConsoleLog: true
 sauce:
   region: eu-central-1
-#  tunnel:
-#    name: oauth-aleksandrs.chikinovs-f21ff_tunnel_name
   concurrency: 2
   sauceignore: .sauceignore
 defaults:
@@ -16,13 +14,64 @@ cypress:
   version: 9.1.0
   configFile: "cypress.json"
 suites:
-  - name: "Main Cypress Test"
-    browser: "chrome"
-    browserVersion: 95
-    platformName: "Windows 10"
-    screenResolution: "1920x1080"
+  - name: cypress - windows 10 - chrome 97
+    browser: chrome
+    browserVersion: 97
+    platformName: windows 10
     config:
-      testFiles: [ "**/*.*" ]
+      testFiles:
+        - '**/*.*'
+  - name: cypress - windows 10 - chrome 96
+    browser: chrome
+    browserVersion: 96
+    platformName: windows 10
+    config:
+      testFiles:
+        - '**/*.*'
+
+  - name: cypress - windows 10 - firefox 96
+    browser: firefox
+    browserVersion: 96.0
+    platformName: windows 10
+    config:
+      testFiles:
+        - '**/*.*'
+  - name: cypress - windows 10 - firefox 95
+    browser: firefox
+    browserVersion: 95.0
+    platformName: windows 10
+    config:
+      testFiles:
+        - '**/*.*'
+  - name: cypress - windows 10 - microsoftedge 97
+    browser: microsoftedge
+    browserVersion: 97.0
+    platformName: windows 10
+    config:
+      testFiles:
+        - '**/*.*'
+  - name: cypress - windows 10 - microsoftedge 96
+    browser: microsoftedge
+    browserVersion: 96.0
+    platformName: windows 10
+    config:
+      testFiles:
+        - '**/*.*'
+#suites:
+#  - name: "Main Cypress Test"
+#    browser: "chrome"
+#    browserVersion: 95
+#    platformName: "Windows 10"
+#    screenResolution: "1920x1080"
+#    config:
+#      testFiles: [ "**/*.*" ]
+#  - name: "Main Cypress Test"
+#    browser: "chrome"
+#    browserVersion: 95
+#    platformName: "Windows 10"
+#    screenResolution: "1920x1080"
+#    config:
+#      testFiles: [ "**/*.*" ]
 artifacts:
   download:
     when: always
