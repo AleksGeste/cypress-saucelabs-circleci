@@ -20,7 +20,7 @@ jobs:
             curl https://saucelabs.com/downloads/sc-4.7.1-linux.tar.gz -o saucelabs.tar.gz
             tar -xzf saucelabs.tar.gz
             cd sc-*
-            bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -x https://eu-central-1.saucelabs.com/rest/v1
+            bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} --region ${SAUCE_REGION} --tunnel-name ${SAUCE_TUNNEL_IDENTIFIER}
       - saucectl/saucectl-run
 workflows:
   build_and_test:
