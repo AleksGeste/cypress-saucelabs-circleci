@@ -5,7 +5,7 @@ showConsoleLog: true
 sauce:
   region: eu-central-1
   tunnel:
-    name: oauth-aleksandrs.chikinovs-f21ff_tunnel_name
+    name: ${SAUCE_TUNNEL_IDENTIFIER}
   concurrency: 2
   sauceignore: .sauceignore
 defaults:
