@@ -28,10 +28,6 @@ jobs:
             cd sc-*
             bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} --region ${SAUCE_REGION} --tunnel-name ${SAUCE_TUNNEL_IDENTIFIER}
       - saucectl/saucectl-run
-      - run:
-            name: Shut Down Sauce Connect Tunnel
-            command: |
-              kill -15 `cat /tmp/sc_client.pid`
 workflows:
   build_and_test:
     jobs:
