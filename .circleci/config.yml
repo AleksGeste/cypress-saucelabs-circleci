@@ -2,17 +2,18 @@ version: 2.1
 orbs:
   saucectl: saucelabs/saucectl-run@2.0.0
 jobs:
-  build:
-    docker:
-      - image: cimg/node:lts
-    steps:
-      - checkout
-      - run: npm install
+#  build:
+#    docker:
+#      - image: cimg/node:lts
+#    steps:
+#      - checkout
+#      - run: npm install
   test:
     docker:
       - image: cimg/node:lts
     steps:
       - checkout
+      - run: npm install
       - run:
           name: Run App
           background: true
@@ -34,7 +35,7 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+#      - build
+      - test
+#          requires:
+#            - build
