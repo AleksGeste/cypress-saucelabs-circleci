@@ -3,7 +3,9 @@ apiVersion: v1alpha
 kind: cypress
 showConsoleLog: true
 sauce:
-  region: eu-central-1
+  region: eu-central
+  tunnel:
+    name: oauth-aleksandrs.chikinovs-f21ff_tunnel_name
   concurrency: 2
   sauceignore: .sauceignore
 defaults:
