@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  saucectl: saucelabs/saucectl-run@1.0.0
 jobs:
   build:
     docker:
@@ -11,12 +13,13 @@ jobs:
       - image: cimg/node:lts
     steps:
       - checkout
-      - run:
-          name: "Install saucectl"
-          command: "sudo npm i -g saucectl"
-      - run:
-          name: "Run Cypress Test on Sauce"
-          command: "saucectl run"
+      - saucectl/saucectl-run
+#      - run:
+#          name: "Install saucectl"
+#          command: "sudo npm i -g saucectl"
+#      - run:
+#          name: "Run Cypress Test on Sauce"
+#          command: "saucectl run"
 workflows:
   build_and_test:
     jobs:
