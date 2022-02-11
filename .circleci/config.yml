@@ -4,6 +4,11 @@ orbs:
   cypress: cypress-io/cypress@1
   saucectl: saucelabs/saucectl-run@2.0.0
 
+executors:
+  with-chrome:
+    docker:
+      - image: 'cypress/browsers:node14.17.0-chrome91-ff89'
+
 jobs:
   runUnitTests:
     docker:
@@ -25,24 +30,11 @@ jobs:
           version: 20.10.2
       - saucectl/saucectl-run
 workflows:
-  version: 2
-  default_workflow:
+  build:
     jobs:
       - runUnitTests
       - cypress/run:
           executor: with-chrome
-          post-install:
-#            - run: "yarn add twilio-cli --no-lockfile \
-#                  && yarn twilio plugins:install @twilio-labs/plugin-serverless \
-#                  && yarn bootstrap \
-#                      accountSid=$TWILIO_ACCOUNT_SID \
-#                      authToken=$TWILIO_AUTH_TOKEN \
-#                      addressSid=$TWILIO_ADDRESS_SID \
-#                      apiKey=$TWILIO_API_KEY \
-#                      apiSecret=$TWILIO_API_SECRET \
-#                      allowedOrigins=$TWILIO_ALLOWED_ORIGIN \
-#                      stage
-#                  "
           yarn: true
           start: 'yarn start'
           store_artifacts: true
