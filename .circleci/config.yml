@@ -13,16 +13,7 @@ jobs:
       - image: cimg/node:lts
     steps:
       - checkout
-#      - saucectl/saucectl-run
-      - run:
-          name: "Install saucectl"
-          command: "sudo npm i -g saucectl"
-      - run:
-          name: "Configure Sauce"
-          command: "saucectl configure -u oauth-aleksandrs.chikinovs-f21ff -a 43e7636a-34f5-4df3-8886-431848e93c14"
-      - run:
-          name: "Run Cypress Sauce"
-          command: "saucectl run"
+      - saucectl/saucectl-run
 workflows:
   build_and_test:
     jobs:
