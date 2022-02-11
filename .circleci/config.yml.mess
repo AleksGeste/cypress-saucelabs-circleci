@@ -1,0 +1,48 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.7
+  cypress: cypress-io/cypress@1
+  saucectl: saucelabs/saucectl-run@2.0.0
+
+executors:
+  with-chrome:
+    docker:
+      - image: 'cypress/browsers:node14.17.0-chrome91-ff89'
+
+jobs:
+  run_saucectl:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - saucectl/saucectl-run
+  runUnitTests:
+    docker:
+      - image: cimg/node:14.18.1
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn-berry
+          with-cache: true
+      - run:
+          command: yarn test
+          name: Run YARN tests
+  test-cypress:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - saucectl/saucectl-run
+workflows:
+  build:
+    jobs:
+      - runUnitTests
+      - cypress/run:
+          executor: with-chrome
+          yarn: true
+          start: 'yarn start'
+          store_artifacts: true
+      - test-cypress
+  test_on_sauce:
+    jobs:
+      - run_saucectl
