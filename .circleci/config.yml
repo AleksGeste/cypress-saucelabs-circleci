@@ -10,6 +10,12 @@ executors:
       - image: 'cypress/browsers:node14.17.0-chrome91-ff89'
 
 jobs:
+  run_saucectl:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - saucectl/saucectl-run
   runUnitTests:
     docker:
       - image: cimg/node:14.18.1
@@ -37,3 +43,6 @@ workflows:
           start: 'yarn start'
           store_artifacts: true
       - test-cypress
+  test_on_sauce:
+    jobs:
+      - run_saucectl
