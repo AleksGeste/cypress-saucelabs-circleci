@@ -3,8 +3,6 @@ apiVersion: v1alpha
 kind: cypress
 showConsoleLog: true
 sauce:
-  tunnel:
-    name: SAUCE_TUNNEL_IDENTIFIER
   concurrency: 2
   sauceignore: .sauceignore
 defaults:
