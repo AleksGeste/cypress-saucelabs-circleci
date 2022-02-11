@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: "Install saucectl"
-          command: "npm i -g saucectl"
+          command: "sudo npm i -g saucectl"
 workflows:
   build_and_test:
     jobs:
