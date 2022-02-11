@@ -9,7 +9,6 @@ jobs:
       - checkout
       - run: npm install
   test:
-    name: Run Cypress on Sauce Labs
     docker:
       - image: cimg/node:lts
     steps:
