@@ -1,17 +1,23 @@
 version: 2.1
 orbs:
   saucectl: saucelabs/saucectl-run@2.0.0
-
 jobs:
-  test-cypress:
+  build:
     docker:
       - image: cimg/node:lts
     steps:
       - checkout
-      - start: 'yarn start'
+      - run: yarn start
+  test:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
       - saucectl/saucectl-run
-
 workflows:
-  default_workflow:
+  build_and_test:
     jobs:
-      - test-cypress
+      - build
+      - test:
+          requires:
+            - build
