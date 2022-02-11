@@ -1,8 +1,21 @@
 version: 2.1
 orbs:
+  node: circleci/node@4.7
+  cypress: cypress-io/cypress@1
   saucectl: saucelabs/saucectl-run@2.0.0
 
 jobs:
+  runUnitTests:
+    docker:
+      - image: cimg/node:14.18.1
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn-berry
+          with-cache: true
+      - run:
+          command: yarn test
+          name: Run YARN tests
   test-cypress:
     docker:
       - image: cimg/node:lts
@@ -11,9 +24,26 @@ jobs:
       - setup_remote_docker:
           version: 20.10.2
       - saucectl/saucectl-run
-
 workflows:
   version: 2
   default_workflow:
     jobs:
+      - runUnitTests
+      - cypress/run:
+          executor: with-chrome
+          post-install:
+#            - run: "yarn add twilio-cli --no-lockfile \
+#                  && yarn twilio plugins:install @twilio-labs/plugin-serverless \
+#                  && yarn bootstrap \
+#                      accountSid=$TWILIO_ACCOUNT_SID \
+#                      authToken=$TWILIO_AUTH_TOKEN \
+#                      addressSid=$TWILIO_ADDRESS_SID \
+#                      apiKey=$TWILIO_API_KEY \
+#                      apiSecret=$TWILIO_API_SECRET \
+#                      allowedOrigins=$TWILIO_ALLOWED_ORIGIN \
+#                      stage
+#                  "
+          yarn: true
+          start: 'yarn start'
+          store_artifacts: true
       - test-cypress

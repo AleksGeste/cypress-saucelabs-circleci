@@ -1,49 +1,25 @@
+version: 2.1
 apiVersion: v1alpha
 kind: cypress
-showconsolelog: false
-rootDir: ./
-defaults: {}
-#  mode: docker
-sauce:
-  region: eu-central-1
-  tunnel:
-    name: oauth-aleksandrs.chikinovs-f21ff_tunnel_name
-  concurrency: 2
-  sauceignore: .sauceignore
-  metadata:
-    name: Testing Cypress Support
-    tags:
-    - e2e
-    - release team
-    - other tag
-    build: Cypress Sample Test Build – $DATE
-  # tunnel:
-  #   id: walkerlj0_tunnel_id
-cypress:
-  configFile: cypress.json
-  version: 9.1.0
-  record: false
-  key: ""
-suites:
-- name: login test
-  browser: chrome
-  config:
-    testFiles:
-    - '**/*.*'
-- name: cypress - windows 10 - firefox 96
-  browser: firefox
-  browserVersion: 96.0
-  platformName: windows 10
-  config:
-    testFiles:
-    - '**/*.*'
+showConsoleLog: true
+defaults:
   mode: sauce
-#docker:
-#  fileTransfer: mount
-version: 2.1
+  timeout: 1m
+rootDir: ./
+cypress:
+  version: 9.1.0
+  configFile: "cypress.json"
+suites:
+  - name: "Main Cypress Test"
+    browser: "chrome"
+    browserVersion: "92"
+    platformName: "Windows 10"
+    screenResolution: "1920x1080"
+    config:
+      testFiles: [ "**/*.*" ]
 artifacts:
   download:
-    match:
-      - '*'
     when: always
-    directory: ./artifacts
+    match:
+      - console.log
+    directory: ./artifacts/
