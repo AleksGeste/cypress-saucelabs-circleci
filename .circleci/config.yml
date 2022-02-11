@@ -17,7 +17,7 @@ jobs:
           name: Run App
           background: true
           command: |
-            npm install
+            npm start
       - run:
           name: Install Sauce Labs and Set Up Tunnel
           background: true
@@ -27,6 +27,10 @@ jobs:
             cd sc-*
             bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} --region ${SAUCE_REGION} --tunnel-name ${SAUCE_TUNNEL_IDENTIFIER}
       - saucectl/saucectl-run
+      - run:
+            name: Shut Down Sauce Connect Tunnel
+            command: |
+              kill -15 `cat /tmp/sc_client.pid`
 workflows:
   build_and_test:
     jobs:
