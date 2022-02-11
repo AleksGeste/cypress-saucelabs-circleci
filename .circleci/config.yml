@@ -27,7 +27,20 @@ jobs:
             tar -xzf saucelabs.tar.gz
             cd sc-*
             bin/sc -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} --region ${SAUCE_REGION} --tunnel-name ${SAUCE_TUNNEL_IDENTIFIER}
-      - saucectl/saucectl-run
+#      - saucectl/saucectl-run
+      - run:
+          name: "Install saucectl"
+          command: |
+            sudo npm i -g saucectl
+      - run:
+          name: "Configure Sauce"
+          command: |
+            saucectl configure -u ${SAUCE_USERNAME} -a ${SAUCE_ACCESS_KEY}
+      - run:
+          name: "Run Cypress Sauce"
+          command: |
+            saucectl run
+            saucectl run --tunnel-name ${SAUCE_TUNNEL_IDENTIFIER}
 workflows:
   build_and_test:
     jobs:
