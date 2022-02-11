@@ -13,7 +13,9 @@ jobs:
       - image: cimg/node:lts
     steps:
       - checkout
-      - saucectl/saucectl-run
+      - run:
+          name: "Run Cypress on Sauce Labs"
+          - saucectl/saucectl-run
 workflows:
   build_and_test:
     jobs:
