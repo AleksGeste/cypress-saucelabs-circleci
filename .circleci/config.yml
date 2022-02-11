@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "Install saucectl"
+          command: "npm i -g saucectl"
 workflows:
   build_and_test:
     jobs:
