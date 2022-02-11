@@ -39,7 +39,6 @@ jobs:
       - run:
           name: "Run Cypress Sauce"
           command: |
-            saucectl run
             saucectl run --tunnel-name ${SAUCE_TUNNEL_IDENTIFIER}
 workflows:
   build_and_test:
